@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>STUDENT ENROLLMENT FORM</h2>
+    <form id="enrollmentForm" method="post" onsubmit="submitForm(event)">
+      <div class="field">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" placeholder="First Name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Email" required>
+      </div>
+      <div class="field">
+        <label for="mobile">Mobile:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required title="Please enter a 10-digit phone number">
+      </div>
+      <div class="field">
+        <label>Gender:</label>
+        <input type="radio" value="male" name="gender">Male
+        <input type="radio" value="female" name="gender">Female
+      </div>
+      <div class="field">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" required>
+      </div>
+      <div class="field">
+        <label>Age:</label>
+        <span id="age"></span>
+      </div>
+      <div class="field">
+        <label>Interested Program:</label>
+        <div class="checkbox-group">
+          <input type="checkbox" id="management" value="Management" required>
+          <label for="management">Management</label>
+          <input type="checkbox" id="marketing" value="Marketing">
+          <label for="marketing">Marketing</label>
+          <input type="checkbox" id="operations" value="Operations">
+          <label for="operations">Operations</label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="address">Address:</label>
+        <textarea id="address" placeholder="Address" required></textarea>
+      </div>
+      <div class="field">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function submitForm(event) {
+      event.preventDefault();
+      var formData = {
+        firstName: document.getElementById("firstName").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        gender: document.querySelector('input[name="gender"]:checked').value,
+        dob: document.getElementById("dob").value,
+        address: document.getElementById("address").value,
+        management: document.getElementById("management").checked,
+        marketing: document.getElementById("marketing").checked,
+        operations: document.getElementById("operations").checked
+      };
+
+      localStorage.setItem("formData", JSON.stringify(formData));
+      window.location.href = "success.html";
+    }
+  </script>
+</body>
+</html>
